@@ -34,9 +34,8 @@ router.post("/", async (req,res)=>{
         const validPassword = await bcrypt.compare(req.body.password , admin.password)
         !validPassword && res.status(400).json("Sorry invalid Credentials")
 
-        res.status(200).json("User logged in Succesfully")
-        console.log(hi)
-        res.send(hi)
+        // res.status(200).json("User logged in Succesfully")
+        res.render('home');
     } catch(err){
         // res.status(500).json(err);
     }

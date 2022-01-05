@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>All Participants</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Ph. No</th>
+                <th>Institute</th>
+                <th>Preference1</th>
+                <th>Preference2</th>
+                <th>Preference3</th>
+                <th>Experience</th>
+                <th>Allotment</th>
+            </tr>
+        </thead>
+        <% committeeList.forEach(function(records){%>
+        <tr>
+          <td><%= records.name %></td> 
+          <td><%= records.email %></td> 
+          <td><%= records.phoneNumber %></td> 
+          <td><%= records.institute %></td> 
+          <td><%= records.preference1 %></td> 
+          <td><%= records.preference2 %></td> 
+          <td><%= records.preference3 %></td> 
+          <td><%= records.experience %></td>
+          <% if(records.allotment != ''){%> 
+          <td><%= records.allotment %></td> 
+          <td></td>
+          <%}%>
+          <% if(records.allotment == ''){%>
+            <td>
+                     <select name="committee" id="committee">
+                     <option value="AIPPM">AIPPM</option>
+                     <option value="UNGA">UNGA</option>
+                     <option value="UNSC">UNSC</option>
+                     <option value="IP">IP</option>
+                     </select> 
+            </td>
+                    <td>
+                          <button onclick="saveAllotment()">Save</button>
+                    </td>
+          <%}%>
+          <td>
+          <% if(records.paid == false){%> 
+            <button class="Paymentmail">Send Payment Mail</button>
+            <%}%>
+          <% if(records.paid == true){%> 
+                Payment Done
+          <%}%>
+         </td>
+         <td>
+            <% if(records.Allotedmail == false && records.allotment != ''){%> 
+                <button class="Allotmentmail">Send Allotment Mail</button>
+                <%}%>
+           </td>
+        </tr>
+        <% })%>
+    </table>
+</body>
+</html>
+<style>
+    h1{
+        margin-bottom: 10px;
+    }
+    button{
+        border-radius: 10px;
+        background-color: rgb(151, 151, 151);
+        color: white;
+        border: none;
+        padding: 5px;
+
+    }
+    .Paymentmail{
+        background-color: rgb(107, 107, 245);
+    }
+    .Allotmentmail{
+        background-color:rgb(65, 155, 65) ;
+    }
+    select{
+        border-radius: 5px;
+    }
+</style>

@@ -31,7 +31,7 @@ router.put("/update", async(req,res)=>{
              await registrations.findByIdAndUpdate(req.body.id,{
                 $set: req.body,
             });
-            res.status(200).json("Details Updated")
+            // res.status(200).json("Details Updated")
         } catch(err){
             return res.status(500).json(err)
         }
@@ -52,7 +52,11 @@ router.get("/dashboard", async(req,res)=>{
          participants.map(participant=>{
              committeeList.push(participant)
          })
-         res.status(200).json(committeeList)
+        //  res.status(200).json(committeeList)
+        if(committee)
+         res.render('dashboard',{title: 'root',committeeList:committeeList ,committee:committee});
+        else
+        res.render('root',{title: 'dashboard',committeeList:committeeList });
     }catch(err){
         res.status(500).json(err)
     }

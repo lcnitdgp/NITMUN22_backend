@@ -44,7 +44,7 @@ const RegistrationSchema = new Schema({
     type: String,
     default: "",
    },
-   isAlloted:{
+   Allotedmail:{
     type: Boolean,
     default:false
    },
