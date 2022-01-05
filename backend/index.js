@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(helmet())
 app.use(morgan("common"));
 app.use(express.static(__dirname + '/public'));
+app.use("/public", express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
 
@@ -47,6 +48,6 @@ app.get('/login', function(req, res) {
 
 
 
-app.listen(8000,()=>{
+app.listen(5000,()=>{
     console.log("Server Running");
 })

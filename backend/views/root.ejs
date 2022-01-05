@@ -2,73 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+    <script src="../public/filter.js"></script>
+    <script src="../public/loader.js"></script>
+    <script src="../public/showfilter.js"></script>
+   
+    
+  
 </head>
 <body>
     <h1>All Participants</h1>
-    <table class="table">
-        <thead>
+
+<div class="body-wrapper">
+    <div class="table-wrapper">
+        <table id="emp-table">
+            <thead>
+                
+                    <th col-index = 1>Name
+                        <select class="table-filter" >
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index = 2>Email</th>
+                    <th col-index = 3>Ph. No</th>
+                    <th col-index = 4>Institute
+                        <select class="table-filter" >
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index = 5>Preference1
+                        <select class="table-filter" >
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index = 6>Preference2
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index = 7>Preference3
+                        <select class="table-filter" >
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index = 8>Experience</th>
+                    <th col-index = 9>Allotment
+                        <!-- <select class="table-filter" >
+                            <option value="all"></option>
+                        </select> -->
+                    </th>
+                
+            </thead>
+            <tbody>
+            <% committeeList.forEach(function(records){%>
+                
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Ph. No</th>
-                <th>Institute</th>
-                <th>Preference1</th>
-                <th>Preference2</th>
-                <th>Preference3</th>
-                <th>Experience</th>
-                <th>Allotment</th>
-            </tr>
-        </thead>
-        <% committeeList.forEach(function(records){%>
-        <tr>
-          <td><%= records.name %></td> 
-          <td><%= records.email %></td> 
-          <td><%= records.phoneNumber %></td> 
-          <td><%= records.institute %></td> 
-          <td><%= records.preference1 %></td> 
-          <td><%= records.preference2 %></td> 
-          <td><%= records.preference3 %></td> 
-          <td><%= records.experience %></td>
-          <% if(records.allotment != ''){%> 
-          <td><%= records.allotment %></td> 
-          <td></td>
-          <%}%>
-          <% if(records.allotment == ''){%>
-            <td>
-                     <select name="committee" id="committee">
-                     <option value="AIPPM">AIPPM</option>
-                     <option value="UNGA">UNGA</option>
-                     <option value="UNSC">UNSC</option>
-                     <option value="IP">IP</option>
-                     </select> 
-            </td>
-                    <td>
-                          <button onclick="saveAllotment()">Save</button>
-                    </td>
-          <%}%>
-          <td>
-          <% if(records.paid == false){%> 
-            <button class="Paymentmail">Send Payment Mail</button>
-            <%}%>
-          <% if(records.paid == true){%> 
-                Payment Done
-          <%}%>
-         </td>
-         <td>
-            <% if(records.Allotedmail == false && records.allotment != ''){%> 
-                <button class="Allotmentmail">Send Allotment Mail</button>
+              <td><%= records.name %></td> 
+              <td><%= records.email %></td> 
+              <td><%= records.phoneNumber %></td> 
+              <td><%= records.institute %></td> 
+              <td><%= records.preference1 %></td> 
+              <td><%= records.preference2 %></td> 
+              <td><%= records.preference3 %></td> 
+              <td><%= records.experience %></td>
+              <% if(records.allotment != ''){%> 
+              <td><%= records.allotment %></td> 
+              <td></td>
+              <%}%>
+              <% if(records.allotment == ''){%>
+                <td>
+                         <select name="committee" id="committee">
+                         <option value="AIPPM">AIPPM</option>
+                         <option value="UNGA">UNGA</option>
+                         <option value="UNSC">UNSC</option>
+                         <option value="IP">IP</option>
+                         </select> 
+                </td>
+                        <td>
+                              <button onclick="saveAllotment()">Save</button>
+                        </td>
+              <%}%>
+              <td>
+              <% if(records.paid == false){%> 
+                <button class="Paymentmail">Send Payment Mail</button>
                 <%}%>
-           </td>
-        </tr>
-        <% })%>
-    </table>
+              <% if(records.paid == true){%> 
+                    Payment Done
+              <%}%>
+             </td>
+             <td>
+                <% if(records.Allotedmail == false && records.allotment != ''){%> 
+                    <button class="Allotmentmail">Send Allotment Mail</button>
+                    <%}%>
+               </td>
+            </tr>
+    
+        
+            <% })%>
+            <tr>
+                <td>204</td>
+                <td>M</td>
+                <td>Design</td>
+                <td>Online</td>
+                <td>Site 2</td>
+                <td>M</td>
+                <td>Design</td>
+                <td>Online</td>
+                <td>Site 2</td>
+            </tr>
+            <tr>
+                <td>204</td>
+                <td>M</td>
+                <td id = "abc">Design</td>
+                <td>Online</td>
+                <td>Site 2</td>
+                <td>F</td>
+                <td>Design</td>
+                <td>Online</td>
+                <td>Site 2</td>
+            </tr>
+           
+         </tbody>
+        </table>
+
+    </div>
+
+
+</div>
+
 </body>
 </html>
 <style>
