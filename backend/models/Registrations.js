@@ -20,7 +20,7 @@ const RegistrationSchema = new Schema({
        unique: true,
    },
    institute:{
-       type: String,
+       type: String, 
        required: true,
    },
    preference1:{
@@ -40,7 +40,7 @@ const RegistrationSchema = new Schema({
        required: true,
        max: 80
    },
-   allotment: {
+   committeeAlloted: {
     type: String,
     default: "",
    },

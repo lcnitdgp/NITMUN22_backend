@@ -16,8 +16,10 @@
   
 </head>
 <body>
-    <h1>All Participants</h1>
-
+    <div class="top">
+        <h1>All Participants</h1>
+        <button class="paydet">Payment Details</button>
+    </div>
 <div class="body-wrapper">
     <div class="table-wrapper">
         <table id="emp-table">
@@ -51,82 +53,69 @@
                         </select>
                     </th>
                     <th col-index = 8>Experience</th>
-                    <th col-index = 9>Allotment
+                    <th col-index = 9>Committee
                         <!-- <select class="table-filter" >
                             <option value="all"></option>
                         </select> -->
                     </th>
+                    <th>Portfolio</th>
+                    <th></th>
+                    <th></th>
+                    <th>Paid</th>
                 
             </thead>
             <tbody>
-            <% committeeList.forEach(function(records){%>
-                
-            <tr>
-              <td><%= records.name %></td> 
-              <td><%= records.email %></td> 
-              <td><%= records.phoneNumber %></td> 
-              <td><%= records.institute %></td> 
-              <td><%= records.preference1 %></td> 
-              <td><%= records.preference2 %></td> 
-              <td><%= records.preference3 %></td> 
-              <td><%= records.experience %></td>
-              <% if(records.allotment != ''){%> 
-              <td><%= records.allotment %></td> 
-              <td></td>
-              <%}%>
-              <% if(records.allotment == ''){%>
-                <td>
-                         <select name="committee" id="committee">
-                         <option value="AIPPM">AIPPM</option>
-                         <option value="UNGA">UNGA</option>
-                         <option value="UNSC">UNSC</option>
-                         <option value="IP">IP</option>
-                         </select> 
-                </td>
+                <% committeeList.forEach(function(records){%>
+                    <tr>
+                      <td><%= records.name %></td> 
+                      <td><%= records.email %></td> 
+                      <td><%= records.phoneNumber %></td> 
+                      <td><%= records.institute %></td> 
+                      <td><%= records.preference1 %></td> 
+                      <td><%= records.preference2 %></td> 
+                      <td><%= records.preference3 %></td> 
+                      <td><%= records.experience %></td>
+                      <% if(records.committeeAlloted != ''){%> 
+                      <td>
+                        <select name="committee" id="committee">
+                            <option value=""><%= records.committeeAlloted%></option>
+                            <option value="AIPPM">AIPPM</option>
+                            <option value="UNGA">UNGA</option>
+                            <option value="UNSC">UNSC</option>
+                            <option value="IP">IP</option>
+                            </select>  </td> 
+                      <%}%>
+                      <% if(records.committeeAlloted == ''){%>
                         <td>
-                              <button onclick="saveAllotment()">Save</button>
+                                 <select name="committee" id="committee">
+                                 <option value="">Select</option>
+                                 <option value="AIPPM">AIPPM</option>
+                                 <option value="UNGA">UNGA</option>
+                                 <option value="UNSC">UNSC</option>
+                                 <option value="IP">IP</option>
+                                 </select> 
                         </td>
-              <%}%>
-              <td>
-              <% if(records.paid == false){%> 
-                <button class="Paymentmail">Send Payment Mail</button>
-                <%}%>
-              <% if(records.paid == true){%> 
-                    Payment Done
-              <%}%>
-             </td>
-             <td>
-                <% if(records.Allotedmail == false && records.allotment != ''){%> 
-                    <button class="Allotmentmail">Send Allotment Mail</button>
-                    <%}%>
-               </td>
-            </tr>
-    
-        
-            <% })%>
-            <tr>
-                <td>204</td>
-                <td>M</td>
-                <td>Design</td>
-                <td>Online</td>
-                <td>Site 2</td>
-                <td>M</td>
-                <td>Design</td>
-                <td>Online</td>
-                <td>Site 2</td>
-            </tr>
-            <tr>
-                <td>204</td>
-                <td>M</td>
-                <td id = "abc">Design</td>
-                <td>Online</td>
-                <td>Site 2</td>
-                <td>F</td>
-                <td>Design</td>
-                <td>Online</td>
-                <td>Site 2</td>
-            </tr>
-           
+                      <%}%>
+                      <td>
+                          <input type="text"> 
+                      </td>
+                      <td>
+                        <button class="">Save</button>
+                      </td>
+                    </form>
+                      <td>
+                      <% if( records.committeeAlloted != '' && records.paid == false){%> 
+                        <button class="Paymentmail">Payment Mail</button>
+                        <%}%>
+                      <% if(records.paid == true){%> 
+                            Payment Done
+                      <%}%>
+                     </td>
+                     <td>
+                        <input type="checkbox" id="paid" name="paid" value="true">
+                     </td>
+                    </tr>
+                    <% })%>
          </tbody>
         </table>
 
@@ -143,19 +132,28 @@
     }
     button{
         border-radius: 10px;
-        background-color: rgb(151, 151, 151);
+        background-color: rgb(65, 155, 65);
         color: white;
         border: none;
-        padding: 5px;
+        padding: 6px;
+        width: 50px;
 
     }
     .Paymentmail{
         background-color: rgb(107, 107, 245);
-    }
-    .Allotmentmail{
-        background-color:rgb(65, 155, 65) ;
+        width: 120px;
     }
     select{
         border-radius: 5px;
+    }
+    input{
+        width: 120px;
+    }
+    .top{
+        display: flex;
+    }
+    .paydet{
+        width: 150px;
+        margin: 20px;
     }
 </style>

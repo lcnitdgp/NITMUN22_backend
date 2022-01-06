@@ -1,5 +1,6 @@
 const express = require("express").Router();
 const registrations = require("../models/Registrations");
+const payments = require("../models/Payment");
 const router = require("./auth");
 
 // Register
@@ -57,6 +58,37 @@ router.get("/dashboard", async(req,res)=>{
          res.render('dashboard',{title: 'root',committeeList:committeeList ,committee:committee});
         else
         res.render('root',{title: 'dashboard',committeeList:committeeList });
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+router.post("/payments", async (req,res) => {
+    try{
+
+        const newPayment = new payments({
+            name: req.body.name,
+            amount: req.body.amount,
+            paidto: req.body.paidto
+        });
+
+        const payment = await newPayment.save();
+        res.status(200).send(payment)
+    } catch(err){
+        res.status(500).json(err);
+    }
+    
+})
+
+router.get("/payments", async(req,res)=>{
+    try{    
+             const paymentDetails = await payments.find()
+         let paymentList = [];
+         paymentDetails.map(payment=>{
+             paymentList.push(payment)
+         })
+        //  res.status(200).json(paymentList)
+        res.render('payment',{title: 'payment',paymentList:paymentList });
     }catch(err){
         res.status(500).json(err)
     }
