@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
-    
     <script src="../public/filter.js"></script>
     <script src="../public/loader.js"></script>
     <script src="../public/showfilter.js"></script>
+    
    
     
   
@@ -18,7 +18,8 @@
 <body>
     <div class="top">
         <h1>All Participants</h1>
-        <button class="paydet">Payment Details</button>
+        <button id="myButton">Payment Details</button>
+        <script src="../public/paydet.js"></script>
     </div>
 <div class="body-wrapper">
     <div class="table-wrapper">
@@ -77,7 +78,8 @@
                       <td><%= records.experience %></td>
                       <% if(records.committeeAlloted != ''){%> 
                       <td>
-                        <select name="committee" id="committee">
+                        <form action="/api/update" method = "POST" class="">
+                        <select name="committeeAlloted" id="committee">
                             <option value=""><%= records.committeeAlloted%></option>
                             <option value="AIPPM">AIPPM</option>
                             <option value="UNGA">UNGA</option>
@@ -86,8 +88,9 @@
                             </select>  </td> 
                       <%}%>
                       <% if(records.committeeAlloted == ''){%>
+                        
                         <td>
-                                 <select name="committee" id="committee">
+                                 <select name="committeeAlloted" id="committee">
                                  <option value="">Select</option>
                                  <option value="AIPPM">AIPPM</option>
                                  <option value="UNGA">UNGA</option>
@@ -97,22 +100,46 @@
                         </td>
                       <%}%>
                       <td>
-                          <input type="text"> 
+                          <input type="text" name="portfolioAlloted"> 
                       </td>
                       <td>
-                        <button class="">Save</button>
+                        <button id="save">Save</button>
                       </td>
                     </form>
                       <td>
                       <% if( records.committeeAlloted != '' && records.paid == false){%> 
-                        <button class="Paymentmail">Payment Mail</button>
+                        <button id="Paymentmail">Payment Mail</button>
+                        <script src="../public/mail.js"></script>
                         <%}%>
                       <% if(records.paid == true){%> 
                             Payment Done
                       <%}%>
                      </td>
                      <td>
-                        <input type="checkbox" id="paid" name="paid" value="true">
+                        <!-- <button id="">Open Modal</button> -->
+                        <input type="checkbox" id="myBtn" name="paid" value="true">
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal">
+                          
+                          <!-- Modal content -->
+                          <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <form action="/api/payments" method = "POST" class="login-form">
+                                <div class="payment-form"> 
+                                Name:
+                                <input type="text"  name=  "name" required value= "<%=records.name %>"/>
+                                Amount:
+                                <input type="number"  name=  "amount" required value="100" />
+                                Paid To:
+                                <input type="text" name= "paidto" id="">
+                                <button class="saveBtn">save</button>
+                            </div>
+                              </form>  
+                          </div>
+                          
+                        </div>
+                        <script src="../public/modal.js"></script>
+                        
                      </td>
                     </tr>
                     <% })%>
@@ -130,16 +157,19 @@
     h1{
         margin-bottom: 10px;
     }
-    button{
+    #myButton{
         border-radius: 10px;
         background-color: rgb(65, 155, 65);
         color: white;
         border: none;
-        padding: 6px;
-        width: 50px;
+        padding: 2px;
+        margin: 10px;
+        width: 100px;
 
+    } :hover{
+        cursor: pointer;
     }
-    .Paymentmail{
+    #Paymentmail{
         background-color: rgb(107, 107, 245);
         width: 120px;
     }
@@ -152,8 +182,55 @@
     .top{
         display: flex;
     }
-    .paydet{
-        width: 150px;
-        margin: 20px;
-    }
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 20%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.payment-form{
+    display: flex;
+    flex-direction: column;
+}
+.saveBtn{
+    width: 20%;
+    border-radius: 10px;
+        background-color: rgb(65, 155, 65);
+        color: white;
+        border: none;
+        padding: 2px;
+        height: 30px;
+        margin: 10px;
+
+}
 </style>

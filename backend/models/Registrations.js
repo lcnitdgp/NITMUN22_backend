@@ -44,6 +44,10 @@ const RegistrationSchema = new Schema({
     type: String,
     default: "",
    },
+   portfolioAlloted:{
+    type: String,
+    default: "",  
+   },
    Allotedmail:{
     type: Boolean,
     default:false

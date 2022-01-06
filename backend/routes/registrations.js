@@ -27,12 +27,12 @@ router.post("/register", async (req,res) => {
 })
 
 // update details
-router.put("/update", async(req,res)=>{
+router.post("/update", async(req,res)=>{
         try{
              await registrations.findByIdAndUpdate(req.body.id,{
                 $set: req.body,
             });
-            // res.status(200).json("Details Updated")
+            res.status(200).json("Details Updated")
         } catch(err){
             return res.status(500).json(err)
         }
@@ -73,7 +73,7 @@ router.post("/payments", async (req,res) => {
         });
 
         const payment = await newPayment.save();
-        res.status(200).send(payment)
+        res.status(200).send("Updated")
     } catch(err){
         res.status(500).json(err);
     }
@@ -82,7 +82,7 @@ router.post("/payments", async (req,res) => {
 
 router.get("/payments", async(req,res)=>{
     try{    
-             const paymentDetails = await payments.find()
+         const paymentDetails = await payments.find()
          let paymentList = [];
          paymentDetails.map(payment=>{
              paymentList.push(payment)
