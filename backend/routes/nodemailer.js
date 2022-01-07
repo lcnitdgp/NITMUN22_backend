@@ -13,14 +13,13 @@ oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
 
 // mailer
 
-router.post("/mail", async (req,res)=>{
+router.post("/mail/:id", async (req,res)=>{
     try{
-        const participants = await registrations.find()
-        let mailList = [];
-        participants.map(participant=>{
-        mailList.push(participant.email)
-        })
+        const participants = await registrations.findById(req.params.id)
+        
         let accessToken = await oAuth2Client.getAccessToken()
+        console.log(oAuth2Client)
+        
         let transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -35,16 +34,17 @@ router.post("/mail", async (req,res)=>{
                 rejectUnauthorized:false
             }
           });
+          console.log(transport)
         let info = await transport.sendMail({
             from: '"Mouli" <subrolinaghosh@gmail.com>', 
-            to: mailList, // list of receivers
+            to: participants.email, // list of receivers
             subject: "Hello ", 
             text: "Hello participants", 
             html: "<b>welcome to nitmun x</b>", 
           });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        res.status(200).json("mail sent")
+        // res.status(200).json("mail sent")
     } catch(err){
         res.status(500).json(err);
     }

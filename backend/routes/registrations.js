@@ -2,7 +2,9 @@ const express = require("express").Router();
 const registrations = require("../models/Registrations");
 const payments = require("../models/Payment");
 const router = require("./auth");
+const bodyParser = require("body-parser");
 
+router.use(bodyParser.urlencoded({extended:false}));
 // Register
 router.post("/register", async (req,res) => {
     try{
@@ -27,15 +29,42 @@ router.post("/register", async (req,res) => {
 })
 
 // update details
-router.post("/update", async(req,res)=>{
+router.post("/update/:id", async(req,res)=>{
         try{
-             await registrations.findByIdAndUpdate(req.body.id,{
-                $set: req.body,
-            });
-            res.status(200).json("Details Updated")
+             await registrations.findOneAndUpdate({_id:req.params.id},{
+              
+                
+                $set:{portfolioAlloted: req.body.portfolioAlloted} 
+               
+            }).then(()=>{
+                
+               res.status(200).json("Details Updated")
+            }).catch(err=>{console.log(err)})
+            
         } catch(err){
             return res.status(500).json(err)
         }
+})
+
+//update committee
+
+router.post("/updatecommittee/:id", async(req,res)=>{
+    try{
+         await registrations.findOneAndUpdate({_id:req.params.id},{
+          
+            
+            $set:{committeeAlloted: req.body.committeeAlloted} 
+           
+        }).then(()=>{
+            console.log(req.body.committeeAlloted)
+           console.log("updated")
+           console.log(req.params.id)
+           res.status(200).json("Details Updated")
+        }).catch(err=>{console.log(err)})
+        
+    } catch(err){
+        return res.status(500).json(err)
+    }
 })
 
 

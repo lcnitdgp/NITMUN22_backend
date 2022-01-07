@@ -6,15 +6,22 @@ function getUniqueValuesFromColumn() {
     var unique_col_values_dict = {}
 
     allFilters = document.querySelectorAll(".table-filter")
-    console.log(allFilters)
+  
        
     allFilters.forEach((filter_i) => {
         col_index = filter_i.parentElement.getAttribute("col-index");
          
         const rows = document.querySelectorAll("#emp-table > tbody > tr")
-
+        
+        let i =0;
         rows.forEach((row) => {
+            i++;
+            
+                if(i<6){
+                    cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
+                }
             cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
+            console.log(cell_value)
             // if the col index is already present in the dict
             if (col_index in unique_col_values_dict) {
 
@@ -32,7 +39,9 @@ function getUniqueValuesFromColumn() {
             } else {
                 unique_col_values_dict[col_index] = new Array(cell_value)
             }
+        
         });
+    
 
         
     });

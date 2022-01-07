@@ -9,6 +9,7 @@ const authRoute = require("./routes/auth");
 const registrationsRoute = require("./routes/registrations");
 const mailer = require("./routes/nodemailer");
 const fs = require('fs');
+const bodyParser = require("body-parser");
 
 
 
@@ -26,8 +27,10 @@ mongoose.connect(process.env.dbURL,
 app.set('view engine', 'ejs');
 
 // middleware
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 app.use(helmet())
+
 app.use(morgan("common"));
 app.use(express.static(__dirname + '/public'));
 app.use("/public", express.static('public'));
@@ -48,6 +51,6 @@ app.get('/login', function(req, res) {
 
 
 
-app.listen(5000,()=>{
+app.listen(5800,()=>{
     console.log("Server Running");
 })

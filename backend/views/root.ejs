@@ -53,16 +53,20 @@
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index = 8>Experience</th>
-                    <th col-index = 9>Committee
-                        <!-- <select class="table-filter" >
-                            <option value="all"></option>
-                        </select> -->
+                    <th col-index = 8>Committee</th>
+                    <th col-index = 9>Experience
+                      
                     </th>
+                    <th></th>
+                    <th></th>
                     <th>Portfolio</th>
                     <th></th>
-                    <th></th>
-                    <th>Paid</th>
+                    
+                    <th>Paid
+                        <select class="table-filter" >
+                            <option value="all"></option>
+                        </select>
+                    </th>
                 
             </thead>
             <tbody>
@@ -75,10 +79,12 @@
                       <td><%= records.preference1 %></td> 
                       <td><%= records.preference2 %></td> 
                       <td><%= records.preference3 %></td> 
+                      <td><%= records.committeeAlloted %></td>
                       <td><%= records.experience %></td>
-                      <% if(records.committeeAlloted != ''){%> 
+                      
+                       <!-- <% if(records.committeeAlloted != ''){%> 
                       <td>
-                        <form action="/api/update" method = "POST" class="">
+                        <form action="/api/update" method = "POST" class=""> 
                         <select name="committeeAlloted" id="committee">
                             <option value=""><%= records.committeeAlloted%></option>
                             <option value="AIPPM">AIPPM</option>
@@ -98,17 +104,34 @@
                                  <option value="IP">IP</option>
                                  </select> 
                         </td>
-                      <%}%>
-                      <td>
-                          <input type="text" name="portfolioAlloted"> 
+                      <%}%>  -->
+                      
+                     
+                     </form> 
+                   
+  
+
+                    
+                        <td>
+                            <form action="/api/updatecommittee/<%= records.id %>" method="POST">
+                            <input type="text" value="<%= records.committeeAlloted %>" name="committeeAlloted" id="portfolioAlloted"/> 
+                                            
+                             <button type="submit" id="save">Save</button>                        
+                          </td>
+                        </form> 
+                    <form action="/api/update/<%= records.id %>" method="POST">
+                    <td>
+                        <input type="text" value="<%= records.portfolioAlloted %>" name="portfolioAlloted" id="portfolioAlloted"/> 
+                    </td>
+                    <td>                       
+                         <button type="submit" id="save">Save</button>                        
                       </td>
-                      <td>
-                        <button id="save">Save</button>
-                      </td>
-                    </form>
+                    </form> 
                       <td>
                       <% if( records.committeeAlloted != '' && records.paid == false){%> 
+                       <form action="/api/mail/<%= records.id %>" method="POST">
                         <button id="Paymentmail">Payment Mail</button>
+                       </form> 
                         <script src="../public/mail.js"></script>
                         <%}%>
                       <% if(records.paid == true){%> 
@@ -116,13 +139,13 @@
                       <%}%>
                      </td>
                      <td>
-                        <!-- <button id="">Open Modal</button> -->
-                        <input type="checkbox" id="myBtn" name="paid" value="true">
+                         <button id="">Open Modal</button> 
+                         <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>"> 
                         <!-- The Modal -->
                         <div id="myModal" class="modal">
                           
                           <!-- Modal content -->
-                          <div class="modal-content">
+                           <div class="modal-content">
                             <span class="close">&times;</span>
                             <form action="/api/payments" method = "POST" class="login-form">
                                 <div class="payment-form"> 
@@ -135,21 +158,21 @@
                                 <button class="saveBtn">save</button>
                             </div>
                               </form>  
-                          </div>
+                          </div> 
                           
                         </div>
                         <script src="../public/modal.js"></script>
                         
                      </td>
-                    </tr>
-                    <% })%>
-         </tbody>
+                    </tr> 
+                 <% })%> 
+          </tbody>
         </table>
 
     </div>
 
 
-</div>
+</div> 
 
 </body>
 </html>

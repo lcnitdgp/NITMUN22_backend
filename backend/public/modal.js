@@ -25,7 +25,11 @@
     // }
 
 
-document.getElementById("myBtn").addEventListener("click", checkFunction);
+y = document.querySelectorAll("#myBtn")
+console.log(y)
+for(let i=0;i<8;i++){
+y[i].addEventListener("click", checkFunction);
+}
 var span = document.getElementsByClassName("close")[0];
 var modal = document.getElementById("myModal");
 console.log(modal);
