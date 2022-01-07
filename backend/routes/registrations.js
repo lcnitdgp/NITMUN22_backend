@@ -92,7 +92,7 @@ router.get("/dashboard", async(req,res)=>{
     }
 })
 
-router.post("/payments", async (req,res) => {
+router.post("/payments/:id", async (req,res) => {
     try{
 
         const newPayment = new payments({
@@ -100,8 +100,17 @@ router.post("/payments", async (req,res) => {
             amount: req.body.amount,
             paidto: req.body.paidto
         });
-
         const payment = await newPayment.save();
+
+        await registrations.findOneAndUpdate({_id:req.params.id},{
+          
+            
+            $set:{paid: true} 
+           
+        }).then(()=>{
+           console.log(req.params.id)
+        }).catch(err=>{console.log(err)})
+
         res.status(200).send("Updated")
     } catch(err){
         res.status(500).json(err);

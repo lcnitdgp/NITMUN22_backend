@@ -128,29 +128,34 @@
                       </td>
                     </form> 
                       <td>
-                      <% if( records.committeeAlloted != '' && records.paid == false){%> 
-                       <form action="/api/mail/<%= records.id %>" method="POST">
-                        <button id="Paymentmail">Payment Mail</button>
-                       </form> 
-                        <script src="../public/mail.js"></script>
-                        <%}%>
                       <% if(records.paid == true){%> 
                             Payment Done
                       <%}%>
+                      <% if( records.committeeAlloted != '' && records.paid != true){%> 
+                        <form action="/api/mail/<%= records.id %>" method="POST">
+                         <button id="Paymentmail">Payment Mail</button>
+                        </form> 
+                         <script src="../public/mail.js"></script>
+                         <%}%>
                      </td>
                      <td>
-                         <button id="">Open Modal</button> 
-                         <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>"> 
+                        <% if(records.paid == true){%> 
+                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" checked> 
+                      <%}%>
+                        <% if(records.paid != true){%> 
+                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" > 
+                      <%}%>
+                        
                         <!-- The Modal -->
                         <div id="myModal" class="modal">
                           
                           <!-- Modal content -->
                            <div class="modal-content">
                             <span class="close">&times;</span>
-                            <form action="/api/payments" method = "POST" class="login-form">
+                            <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
                                 <div class="payment-form"> 
                                 Name:
-                                <input type="text"  name=  "name" required value= "<%=records.name %>"/>
+                                <input type="text"  name=  "name" required value=""/>
                                 Amount:
                                 <input type="number"  name=  "amount" required value="100" />
                                 Paid To:
