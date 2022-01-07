@@ -67,6 +67,26 @@ router.post("/updatecommittee/:id", async(req,res)=>{
     }
 })
 
+//update payment status
+router.post("/updatepaid/:id", async(req,res)=>{
+    try{
+         await registrations.findOneAndUpdate({_id:req.params.id},{
+          
+            
+            $set:{paid: req.body.paid} 
+           
+        }).then(()=>{
+            console.log(req.body.paid)
+           console.log("updated")
+           console.log(req.params.id)
+           res.status(200).json("Details Updated")
+        }).catch(err=>{console.log(err)})
+        
+    } catch(err){
+        return res.status(500).json(err)
+    }
+})
+
 
 // dashboard
 router.get("/dashboard", async(req,res)=>{

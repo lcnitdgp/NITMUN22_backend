@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-    
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
     <script src="../public/filter.js"></script>
     <script src="../public/loader.js"></script>
     <script src="../public/showfilter.js"></script>
-    
-   
-    
-  
+
+
+
+
 </head>
+
 <body>
     <div class="top">
         <h1>All Participants</h1>
@@ -22,68 +25,91 @@
         <script src="../public/paydet.js"></script>
         
     </div>
-<div class="body-wrapper">
-    <div class="table-wrapper">
-        <table id="emp-table">
-            <thead>
-                
-                    <th col-index = 1>Name
-                        <select class="table-filter" >
-                            <option value="all"></option>
-                        </select>
+    <div class="body-wrapper">
+        <div class="table-wrapper">
+            <table id="emp-table">
+                <thead>
+
+                    <th col-index=1>Name
+                       
                     </th>
-                    <th col-index = 2>Email</th>
-                    <th col-index = 3>Ph. No</th>
-                    <th col-index = 4>Institute
-                        <select class="table-filter" >
-                            <option value="all"></option>
-                        </select>
-                    </th>
-                    <th col-index = 5>Preference1
-                        <select class="table-filter" >
-                            <option value="all"></option>
-                        </select>
-                    </th>
-                    <th col-index = 6>Preference2
+                    <th col-index=2>Email</th>
+                    <th col-index=3>Ph. No</th>
+                    <th col-index=4>Institute
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index = 7>Preference3
-                        <select class="table-filter" >
+                    <th col-index=5>Preference1
+                        <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index = 8>Committee</th>
-                    <th col-index = 9>Experience
-                      
+                    <th col-index=6>Preference2
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
                     </th>
-                    <th></th>
-                    <th></th>
-                    <th>Portfolio</th>
-                    <th></th>
+                    <th col-index=7>Preference3
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index=8>Committee
+                        <select class="table-filter">
+                            <option value="all"></option>
+                        </select>
+                    </th>
+                    <th col-index=9>Experience
+
+                    </th>
+                    <th col-index=10></th>
                     
-                    <th>Paid
-                        <select class="table-filter" >
+                    <th col-index=11>Portfolio
+                       
+                    </th>
+                    <th col-index=12></th>
+                    <th col-index=13></th>
+
+                    <th col-index=14>Paid
+                        <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                
-            </thead>
-            <tbody>
-                <% committeeList.forEach(function(records){%>
-                    <tr>
-                      <td><%= records.name %></td> 
-                      <td><%= records.email %></td> 
-                      <td><%= records.phoneNumber %></td> 
-                      <td><%= records.institute %></td> 
-                      <td><%= records.preference1 %></td> 
-                      <td><%= records.preference2 %></td> 
-                      <td><%= records.preference3 %></td> 
-                      <td><%= records.committeeAlloted %></td>
-                      <td><%= records.experience %></td>
-                      
-                       <!-- <% if(records.committeeAlloted != ''){%> 
+
+                </thead>
+                <tbody>
+                    <% committeeList.forEach(function(records){%>
+                        <tr>
+                            <td>
+                                <%= records.name %>
+                            </td>
+                            <td>
+                                <%= records.email %>
+                            </td>
+                            <td>
+                                <%= records.phoneNumber %>
+                            </td>
+                            <td>
+                                <%= records.institute %>
+                            </td>
+                            <td>
+                                <%= records.preference1 %>
+                            </td>
+                            <td>
+                                <%= records.preference2 %>
+                            </td>
+                            <td>
+                                <%= records.preference3 %>
+                            </td>
+                            <td>
+                                <%= records.committeeAlloted %>
+                            </td>
+                            <td>
+                                <%= records.experience %>
+                            </td>
+
+                            <!-- <% if(records.committeeAlloted != ''){%> 
                       <td>
                         <form action="/api/update" method = "POST" class=""> 
                         <select name="committeeAlloted" id="committee">
@@ -106,11 +132,6 @@
                                  </select> 
                         </td>
                       <%}%>  -->
-                      
-                     
-                     </form> 
-                   
-  
 
                     
                         <td>
@@ -180,16 +201,100 @@
         <script src="../public/csv.js"></script>
     </div>
 
+                            </form>
 
-</div> 
+
+
+
+                            <td>
+                                <form action="/api/updatecommittee/<%= records.id %>" method="POST">
+                                    <input type="text" value="<%= records.committeeAlloted %>" name="committeeAlloted"
+                                        id="portfolioAlloted" />
+
+                                    <button type="submit" id="save">Save</button>
+                            </td>
+                            </form>
+                            <form action="/api/update/<%= records.id %>" method="POST">
+                                <td>
+                                    <input type="text" value="<%= records.portfolioAlloted %>" name="portfolioAlloted"
+                                        id="portfolioAlloted" />
+                                </td>
+                                <td>
+                                    <button type="submit" id="save">Save</button>
+                                </td>
+                            </form>
+                            <td>
+                                <% if(records.paid==true){%>
+                                    Payment Done
+                                    <%}%>
+                                        <% if( records.committeeAlloted !='' && records.paid !=true){%>
+                                            <form action="/api/mail/<%= records.id %>" method="POST">
+                                                <button id="Paymentmail">Payment Mail</button>
+                                            </form>
+                                            <script src="../public/mail.js"></script>
+                                            <%}%>
+                            </td>
+                            <td>
+                                <% if(records.paid==true){%>
+                                    <form action="/api/updatepaid/<%= records.id %>" value="true" method="POST">
+                                        <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>"
+                                            checked>
+                                    </form>
+
+                                    <%}%>
+                                        <% if(records.paid !=true){%>
+                                            <form action="/api/updatepaid/<%= records.id %>" value="false"
+                                                method="POST">
+                                                <input type="checkbox" id="myBtn"
+                                                    action="/api/updatepaid/<%= records.id %>" method="POST" name="paid"
+                                                    value="<%= records.paid %>">
+                                            </form>
+                                            <%}%>
+
+                                                <!-- The Modal -->
+                                                <div id="myModal" class="modal">
+
+                                                    <!-- Modal content -->
+                                                    <div class="modal-content">
+                                                        <span class="close">&times;</span>
+                                                        <form action="/api/payments/<%= records.id %>" method="POST"
+                                                            class="login-form">
+                                                            <div class="payment-form">
+                                                                Name:
+                                                                <input type="text" name="name" required value="" />
+                                                                Amount:
+                                                                <input type="number" name="amount" required
+                                                                    value="100" />
+                                                                Paid To:
+                                                                <input type="text" name="paidto" id="">
+                                                                <button class="saveBtn">save</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                                <script src="../public/modal.js"></script>
+
+                            </td>
+                        </tr>
+                        <% })%>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
 
 </body>
+
 </html>
 <style>
-    h1{
+    h1 {
         margin-bottom: 10px;
     }
-    #myButton{
+
+    #myButton {
         border-radius: 10px;
         background-color: rgb(65, 155, 65);
         color: white;
@@ -198,65 +303,84 @@
         margin: 10px;
         width: 100px;
 
-    } :hover{
+    }
+
+    :hover {
         cursor: pointer;
     }
-    #Paymentmail{
+
+    #Paymentmail {
         background-color: rgb(107, 107, 245);
         width: 120px;
     }
-    select{
+
+    select {
         border-radius: 5px;
     }
-    input{
+
+    input {
         width: 120px;
     }
-    .top{
+
+    .top {
         display: flex;
     }
+
     .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+    }
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 20%; /* Could be more or less, depending on screen size */
-}
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 20%;
+        /* Could be more or less, depending on screen size */
+    }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-.payment-form{
-    display: flex;
-    flex-direction: column;
-}
-.saveBtn{
-    width: 20%;
-    border-radius: 10px;
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .payment-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .saveBtn {
+        width: 20%;
+        border-radius: 10px;
         background-color: rgb(65, 155, 65);
         color: white;
         border: none;
@@ -264,5 +388,5 @@
         height: 30px;
         margin: 10px;
 
-}
+    }
 </style>

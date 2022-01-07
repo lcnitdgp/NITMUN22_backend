@@ -20,7 +20,7 @@ function getUniqueValuesFromColumn() {
                 if(i<6){
                     cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
                 }
-            cell_value = row.querySelector("td:nth-child("+col_index+")").innerHTML;
+          
             console.log(cell_value)
             // if the col index is already present in the dict
             if (col_index in unique_col_values_dict) {
