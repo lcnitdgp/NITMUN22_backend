@@ -1,44 +1,51 @@
 const router = require("express").Router();
 const Admin = require("../models/Admin");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+//Handle Tokens
+const maxAge = 3 * 24 * 3600;
+const createtokens = (id) => {
+    return jwt.sign({ id }, 'secretlogin', {
+        expiresIn: maxAge
+    })
+}
 
 // SIGNUP
-router.post("/signup", async (req,res) => {
-    try{
+router.post("/signup", async (req, res) => {
+    try {
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        
         const newAdmin = new Admin({
             username: req.body.username,
             password: hashedPassword,
         });
-
-
         const admin = await newAdmin.save();
+        console.log(admin);
+        const token = createtokens(admin._id)
+        res.cookie('nitmun', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(200).send(admin)
-    } catch(err){
+    } catch (err) {
         res.status(500).json(err);
     }
-    
+
 })
 
 // LOGIN
 
-router.post("/", async (req,res)=>{
-    try{
-            const admin = await Admin.findOne({
-            username:req.body.username
-        });
-        !admin && res.status(404).json("Sorry invalid Credentials");
-        const validPassword = await bcrypt.compare(req.body.password , admin.password)
-        !validPassword && res.status(400).json("Sorry invalid Credentials")
-
-        // res.status(200).json("User logged in Succesfully")
-        res.render('home')
-    } catch(err){
-        // res.status(500).json(err);
+router.post("/", async (req, res) => {
+    const {username,password} = req.body
+    try {
+        const user = await Admin.login(username,password)
+        const token = createtokens(user._id)
+        if(username==='admin@NITMUN'){
+            res.cookie('nitmun',token,{httpOnly: true, maxAge: maxAge * 1000})
+            res.status(201).render('home')
+        } 
+    } catch (err) {
+        console.log(err);
+        res.status(400).json({error: err})
     }
 });
-
 module.exports = router

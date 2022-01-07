@@ -10,9 +10,9 @@ const registrationsRoute = require("./routes/registrations");
 const mailer = require("./routes/nodemailer");
 const fs = require('fs');
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
 
-
-
+app.use(cookieParser())
 dotenv.config();
 
 mongoose.connect(process.env.dbURL,
@@ -46,11 +46,11 @@ app.use("/api", mailer);
 
 app.get('/login', function(req, res) {
     res.render('admin');
-  });
+});
 
 
 
 
-app.listen(5700,()=>{
+app.listen(5200,()=>{
     console.log("Server Running");
 })

@@ -3,7 +3,7 @@ const registrations = require("../models/Registrations");
 const payments = require("../models/Payment");
 const router = require("./auth");
 const bodyParser = require("body-parser");
-
+const {reqauth, checkuser} = require('../middleware/authpass')
 router.use(bodyParser.urlencoded({extended:false}));
 // Register
 router.post("/register", async (req,res) => {
@@ -89,7 +89,7 @@ router.post("/updatepaid/:id", async(req,res)=>{
 
 
 // dashboard
-router.get("/dashboard", async(req,res)=>{
+router.get("/dashboard", reqauth, checkuser ,async(req,res)=>{
     const committee = req.query.committee;
     try{    
              const participants = committee ? 
