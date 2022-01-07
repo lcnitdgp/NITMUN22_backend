@@ -20,6 +20,7 @@
         <h1>All Participants</h1>
         <button id="myButton">Payment Details</button>
         <script src="../public/paydet.js"></script>
+        
     </div>
 <div class="body-wrapper">
     <div class="table-wrapper">
@@ -140,10 +141,10 @@
                      </td>
                      <td>
                         <% if(records.paid == true){%> 
-                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" checked> 
+                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" checked disabled> 
                       <%}%>
                         <% if(records.paid != true){%> 
-                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" > 
+                            <input type="checkbox" id="myBtn" name="paid" value="100" > 
                       <%}%>
                         
                         <!-- The Modal -->
@@ -173,7 +174,7 @@
                  <% })%> 
           </tbody>
         </table>
-
+        <script src="../public/csv.js"></script>
     </div>
 
 

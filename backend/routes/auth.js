@@ -35,7 +35,7 @@ router.post("/", async (req,res)=>{
         !validPassword && res.status(400).json("Sorry invalid Credentials")
 
         // res.status(200).json("User logged in Succesfully")
-        res.render('abc');
+        res.render('home')
     } catch(err){
         // res.status(500).json(err);
     }
