@@ -165,15 +165,13 @@
                     </td>
                       <td>
                       <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
-                        <form action="/api/mail/<%= records.id %>" method="POST">
+                        <form action="/api/allotmentmail/<%= records.id %>" method="POST">
                             <button id="Allotmentmail">Send Mail</button>
                            </form> 
-                            <script src="../public/mail.js"></script>
+                            <!-- <script src="../public/mail.js"></script> -->
                       <%}%>
                       <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%> 
-                        <form action="/api/mail/<%= records.id %>" method="POST">
-                            <button id="Paymentmail">Payment Received</button>
-                           </form> 
+                            <button id="Paymentmail">Update Payment</button>
                            <script src="../public/modal.js"></script>
                       <%}%>
                       <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid == true){%> 
@@ -191,6 +189,9 @@
                       <input type="number"  name=  "amount" required value="100" />
                         Paid To:
                       <input type="text" name= "paidto" id="">
+                      <form action="/api/paymentmail/<%= records.id %>" method="POST">
+                        <button id="Allotmentmail">Send Mail</button>
+                       </form> 
                       <button class="saveBtn">save</button>
                   </div>
                   </form>  

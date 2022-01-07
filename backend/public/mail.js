@@ -1,4 +1,4 @@
-document.getElementById("Paymentmail").addEventListener("click", myFunction);
+document.getElementById("Allotmentmail").addEventListener("click", myFunction);
 
 function myFunction(){
   window.location = '/api/mail'
