@@ -109,19 +109,21 @@
                                 <%= records.experience %>
                             </td>
 
-                            <!-- <% if(records.committeeAlloted != ''){%> 
+                            <% if(records.committeeAlloted != ''){%> 
                       <td>
-                        <form action="/api/update" method = "POST" class=""> 
+                        <form action="/api/updatecommittee/<%= records.id %>" method="POST" class =""> 
                         <select name="committeeAlloted" id="committee">
                             <option value=""><%= records.committeeAlloted%></option>
                             <option value="AIPPM">AIPPM</option>
                             <option value="UNGA">UNGA</option>
                             <option value="UNSC">UNSC</option>
                             <option value="IP">IP</option>
-                            </select>  </td> 
+                            </select> 
+                            <button type="submit" id="save">Save</button>
+                         </td> 
                       <%}%>
                       <% if(records.committeeAlloted == ''){%>
-                        
+                        <form action="/api/updatecommittee/<%= records.id %>" method="POST" class =""> 
                         <td>
                                  <select name="committeeAlloted" id="committee">
                                  <option value="">Select</option>
@@ -130,22 +132,24 @@
                                  <option value="UNSC">UNSC</option>
                                  <option value="IP">IP</option>
                                  </select> 
+                                 <button type="submit" id="save">Save</button>
                         </td>
-                      <%}%>  -->
+                        </form>
+                         
+                      <%}%>  
 
                     
                         <td>
-                            <form action="/api/updatecommittee/<%= records.id %>" method="POST">
+                            <!-- <form action="/api/updatecommittee/<%= records.id %>" method="POST">
                             <input type="text" value="<%= records.committeeAlloted %>" name="committeeAlloted" id="portfolioAlloted"/> 
                                             
                              <button type="submit" id="save">Save</button>                        
                           </td>
-                        </form> 
+                        </form>  -->
                     <form action="/api/update/<%= records.id %>" method="POST">
                     <td>
                         <input type="text" value="<%= records.portfolioAlloted %>" name="portfolioAlloted" id="portfolioAlloted"/> 
-                    </td>
-                    <td>                       
+                                        
                          <button type="submit" id="save">Save</button>                        
                       </td>
                     </form> 
