@@ -1,5 +1,5 @@
 
-y = document.querySelectorAll("#myBtn")
+y = document.querySelectorAll("#Paymentmail")
 console.log(y)
 for(let i=0;i<8;i++){
 y[i].addEventListener("click", checkFunction);

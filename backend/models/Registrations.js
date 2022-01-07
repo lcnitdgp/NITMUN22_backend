@@ -23,13 +23,25 @@ const RegistrationSchema = new Schema({
        type: String, 
        required: true,
    },
+   committee1:{
+    type: String,
+    required: true,
+   },
    preference1:{
        type: String,
        required: true,
    },
+   committee2:{
+    type: String,
+    required: true,
+   },
    preference2:{
        type: String,
        required: true,
+   },
+   committee3:{
+    type: String,
+    required: true,
    },
    preference3:{
        type: String,
@@ -47,6 +59,10 @@ const RegistrationSchema = new Schema({
    portfolioAlloted:{
     type: String,
     default: "",  
+   },
+   status:{
+       type: String,
+       default: "To Send"
    },
    Allotedmail:{
     type: Boolean,

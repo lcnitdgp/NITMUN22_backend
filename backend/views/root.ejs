@@ -40,22 +40,25 @@
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=5>Preference1
+                    <th col-index=5>Committee1
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=6>Preference2
+                    <th>Preference1</th>
+                    <th col-index=6>Committee2
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=7>Preference3
+                    <th>Preference2</th>
+                    <th col-index=7>Committee3
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=8>Committee
+                    <th>Preference3</th>
+                    <th col-index=8>Committee Alloted
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
@@ -63,19 +66,18 @@
                     <th col-index=9>Experience
 
                     </th>
-                    <th col-index=10></th>
+                    <th col-index=10>Allot Committee</th>
                     
-                    <th col-index=11>Portfolio
+                    <th col-index=11>Allot Portfolio
                        
                     </th>
                     <th col-index=12></th>
-                    <th col-index=13></th>
-
-                    <th col-index=14>Paid
+                    <th col-index=13>Status
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
+                    <th col-index=14></th>
 
                 </thead>
                 <tbody>
@@ -94,10 +96,19 @@
                                 <%= records.institute %>
                             </td>
                             <td>
+                                <%= records.committee1 %>
+                            </td>
+                            <td>
                                 <%= records.preference1 %>
                             </td>
                             <td>
+                                <%= records.committee2 %>
+                            </td>
+                            <td>
                                 <%= records.preference2 %>
+                            </td>
+                            <td>
+                                <%= records.committee3 %>
                             </td>
                             <td>
                                 <%= records.preference3 %>
@@ -153,49 +164,45 @@
                          <button type="submit" id="save">Save</button>                        
                       </td>
                     </form> 
+                    <td>
+                      <%= records.status %>
+                    </td>
                       <td>
-                      <% if(records.paid == true){%> 
-                            Payment Done
-                      <%}%>
-                      <% if( records.committeeAlloted != '' && records.paid != true && records.portfolioAlloted != ''){%> 
+                      <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
                         <form action="/api/mail/<%= records.id %>" method="POST">
-                         <button id="Paymentmail">Payment Mail</button>
-                        </form> 
-                         <script src="../public/mail.js"></script>
-                         <%}%>
-                     </td>
-                     <td>
-                        <% if(records.paid == true){%> 
-                            <input type="checkbox" id="myBtn" name="paid" value="<%= records.paid %>" checked disabled> 
+                            <button id="Allotmentmail">Send Mail</button>
+                           </form> 
+                            <script src="../public/mail.js"></script>
                       <%}%>
-                        <% if(records.paid != true){%> 
-                            <input type="checkbox" id="myBtn" name="paid" value="100" > 
+                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%> 
+                        <form action="/api/mail/<%= records.id %>" method="POST">
+                            <button id="Paymentmail">Payment Received</button>
+                           </form> 
+                           <script src="../public/modal.js"></script>
                       <%}%>
-                        
-                        <!-- The Modal -->
-                       
-                        <div id="myModal" class="modal">
-                          
-                          <!-- Modal content -->
-                           <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
-                                <div class="payment-form"> 
-                                Name:
-                                <input type="text"  name=  "name" required value=""/>
-                                Amount:
-                                <input type="number"  name=  "amount" required value="100" />
-                                Paid To:
-                                <input type="text" name= "paidto" id="">
-                                <button class="saveBtn">save</button>
-                            </div>
-                              </form>  
-                          </div> 
-                          
-                        </div>
-                        <script src="../public/modal.js"></script>
-                        
-                     </td>
+                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid == true){%> 
+                           Done
+                      <%}%>
+                      </td>
+                      <div id="myModal" class="modal">
+                      <div class="modal-content">
+                      <span class="close">&times;</span>
+                      <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
+                      <div class="payment-form"> 
+                        Name:
+                      <input type="text"  name=  "name" required value=""/>
+                        Amount:
+                      <input type="number"  name=  "amount" required value="100" />
+                        Paid To:
+                      <input type="text" name= "paidto" id="">
+                      <button class="saveBtn">save</button>
+                  </div>
+                  </form>  
+              </div> 
+                                                
+              </div>
+              
+                      
                     </tr> 
                  <% })%> 
           </tbody>
@@ -229,9 +236,23 @@
         cursor: pointer;
     }
 
-    #Paymentmail {
+    #Allotmentmail {
         background-color: rgb(107, 107, 245);
         width: 120px;
+        border-radius: 10px;
+        color: white;
+        border: none;
+        padding: 5px;
+        margin: 5px;
+    }
+    #Paymentmail {
+        background-color: rgb(50, 212, 29);
+        width: 120px;
+        border-radius: 10px;
+        color: white;
+        border: none;
+        padding: 5px;
+        margin: 5px;
     }
 
     select {
