@@ -39,10 +39,10 @@ router.post("/", async (req, res) => {
     try {
         const user = await Admin.login(username,password)
         const token = createtokens(user._id)
-        if(username==='admin@NITMUN'){
+    
             res.cookie('nitmun',token,{httpOnly: true, maxAge: maxAge * 1000})
             res.status(201).render('home')
-        } 
+        
     } catch (err) {
         console.log(err);
         res.status(400).json({error: err})

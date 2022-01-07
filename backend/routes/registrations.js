@@ -38,7 +38,7 @@ router.post("/update/:id", async(req,res)=>{
                
             }).then(()=>{
                 
-               res.status(200).json("Details Updated")
+                res.redirect("/api/dashboard")
             }).catch(err=>{console.log(err)})
             
         } catch(err){
@@ -59,7 +59,7 @@ router.post("/updatecommittee/:id", async(req,res)=>{
             console.log(req.body.committeeAlloted)
            console.log("updated")
            console.log(req.params.id)
-           res.status(200).json("Details Updated")
+           res.redirect("/api/dashboard")
         }).catch(err=>{console.log(err)})
         
     } catch(err){
@@ -79,7 +79,7 @@ router.post("/updatepaid/:id", async(req,res)=>{
             console.log(req.body.paid)
            console.log("updated")
            console.log(req.params.id)
-           res.status(200).json("Details Updated")
+           res.redirect("/api/dashboard")
         }).catch(err=>{console.log(err)})
         
     } catch(err){
@@ -131,7 +131,7 @@ router.post("/payments/:id", async (req,res) => {
            console.log(req.params.id)
         }).catch(err=>{console.log(err)})
 
-        res.status(200).send("Updated")
+        res.redirect("/api/dashboard")
     } catch(err){
         res.status(500).json(err);
     }

@@ -44,7 +44,7 @@ router.post("/mail/:id", async (req,res)=>{
           });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        res.status(200).json("mail sent")
+        res.redirect("/api/dashboard")
     } catch(err){
         res.status(500).json(err);
     }
