@@ -68,6 +68,10 @@ const RegistrationSchema = new Schema({
     type: Boolean,
     default:false
    },
+   Paymentupdate:{
+    type: Boolean,
+    default:false
+   },
    paid:{
        type: Boolean,
        default:false

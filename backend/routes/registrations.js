@@ -117,7 +117,16 @@ router.get("/dashboard", reqauth, checkuser ,async(req,res)=>{
 
 router.post("/payments/:id", async (req,res) => {
     try{
-
+        
+        await registrations.findOneAndUpdate({_id:req.params.id},{
+          
+            
+            $set:{Paymentupdate: true} 
+           
+        }).then(()=>{
+           console.log(req.params.id)
+        }).catch(err=>{console.log(err)})
+        
         const newPayment = new payments({
             name: req.body.name,
             amount: req.body.amount,
@@ -125,14 +134,7 @@ router.post("/payments/:id", async (req,res) => {
         });
         const payment = await newPayment.save();
 
-        await registrations.findOneAndUpdate({_id:req.params.id},{
-          
-            
-            $set:{paid: true} 
-           
-        }).then(()=>{
-           console.log(req.params.id)
-        }).catch(err=>{console.log(err)})
+        
 
         res.redirect("/api/dashboard")
     } catch(err){

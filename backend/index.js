@@ -56,6 +56,6 @@ app.post('/api/modal', async(req,res) => {
 
 
 
-app.listen(5200,()=>{
+app.listen(5000,()=>{
     console.log("Server Running");
 })
