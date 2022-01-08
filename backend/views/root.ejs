@@ -175,8 +175,10 @@
                             <!-- <script src="../public/mail.js"></script> -->
                       <%}%>
                       <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%> 
+                        <form action="/api/paymentmail/<%= records.id %>" method="POST">
                             <button id="Paymentmail">Update Payment</button>
-                           <script src="../public/modal.js"></script>
+                        </form> 
+                        <script src="../public/modal.js"></script>
                       <%}%>
                       <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid == true){%> 
                            Done
@@ -208,10 +210,6 @@
                  <% })%> 
           </tbody>
         </table>
-        <button id="btn">
-            download CSV
-        </button>
-        <script src="../public/csv.js"></script>
     </div>
 
 </body>
