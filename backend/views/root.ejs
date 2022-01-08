@@ -156,7 +156,7 @@
                       <%= records.status %>
                     </td> 
                     <td>
-                        <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
+                        <% if(records.committeeAlloted != ' ' && records.Allotedmail != true){%> 
                           <form action="/api/allotmentmail/<%= records.id %>" method="POST">
                               <button id="Allotmentmail">Allotment Mail</button>
                           </form> 

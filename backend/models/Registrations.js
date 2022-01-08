@@ -54,11 +54,11 @@ const RegistrationSchema = new Schema({
    },
    committeeAlloted: {
     type: String,
-    default: "",
+    default: " ",
    },
    portfolioAlloted:{
     type: String,
-    default: "",  
+    default: " ",  
    },
    status:{
        type: String,
