@@ -140,7 +140,12 @@
                                  <option value="UNSC">UNSC</option>
                                  <option value="IP">IP</option>
                                  </select> 
+                                 <% if(records.Allotedmail == true){%>
                                  <button type="submit" id="save">Save</button>
+                                    <%}%>
+                                    <% if(records.Allotedmail == false){%>
+                                        <button type="submit" id="save" disabled>Save</button>
+                                    <%}%>
                         </td>
                         </form>
                          
@@ -157,9 +162,9 @@
                       <%= records.status %>
                     </td> 
                     <td>
-                        <% if(records.committeeAlloted != ' ' && records.Allotedmail != true){%> 
+                        <% if( records.Allotedmail != true){%> 
                           <form action="/api/allotmentmail/<%= records.id %>" method="POST">
-                              <button id="Allotmentmail">Allotment Mail</button>
+                              <button id="Allotmentmail">Registration Mail</button>
                           </form> 
                               <!-- <script src="../public/mail.js"></script> -->
                         <%}%>
