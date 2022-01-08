@@ -186,15 +186,19 @@
                         <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
                         <div class="payment-form"> 
                             Name:
-                        <input type="text"  name=  "name" required value=""/>
+                        <input type="text"  name=  "name" required value="<%= records.name %>"/>
                             Amount:
-                        <input type="number"  name=  "amount" required value="100" />
+                        <input type="number"  name=  "amount" required value="0" />
                             Paid To:
                         <input type="text" name= "paidto" id="">
                         <form action="/api/paymentmail/<%= records.id %>" method="POST">
                             <button id="Allotmentmail">Send Mail</button>
                         </form> 
+                        
+                        <form action="/api/updatepaid/<%= records.id %>" method="POST">
                         <button class="saveBtn">save</button>
+                        </form>
+                         
                      <% } %>
                   </div>
                   </form>  

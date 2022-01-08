@@ -76,7 +76,7 @@ router.post("/updatepaid/:id", async(req,res)=>{
          await registrations.findOneAndUpdate({_id:req.params.id},{
           
             
-            $set:{paid: req.body.paid} 
+            $set:{paid: true} 
            
         }).then(()=>{
             console.log(req.body.paid)
