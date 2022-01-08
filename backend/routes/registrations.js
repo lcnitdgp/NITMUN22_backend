@@ -14,8 +14,11 @@ router.post("/register", async (req,res) => {
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
             institute: req.body.institute,
+            committee1: req.body.committee1,
             preference1: req.body.preference1,
+            committee2: req.body.committee2,
             preference2: req.body.preference2,
+            committee3: req.body.committee3,
             preference3: req.body.preference3,
             experience: req.body.experience,
         });
