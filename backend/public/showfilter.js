@@ -58,16 +58,6 @@ function filter_rows() {
 function display(){
     x =  document.querySelectorAll(".table-filter")
 
-
-// console.log(x)
-
-// x.forEach((filter_i) => {
-//     col_index = filter_i.parentElement.getAttribute("col-index");
-//     console.log(col_index)
-//     var y = col_index
-//     y.addEventListener("change", filter_rows)
-    
-        // x[col_index-1].addEventListener('change', filter_rows)
 for(let i=0;i<x.length;i++){
         x[i].addEventListener('change', filter_rows)
         
