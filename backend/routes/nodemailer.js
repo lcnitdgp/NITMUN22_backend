@@ -20,7 +20,7 @@ router.post("/allotmentmail/:id", async (req,res)=>{
           
             
             $set:{Allotedmail: true,
-                status: "pending"
+                status: "PAYMENT PENDING"
             } 
            
         }).then(()=>{
@@ -66,17 +66,19 @@ router.post("/paymentmail/:id", async (req,res)=>{
         await registrations.findOneAndUpdate({_id:req.params.id},{
           
             
-            $set:{paid: true,
-                status: "done"
+            $set:{
+                paid:true,
+                status: "RECEIVED PAYMENT"
             } 
            
         }).then(()=>{
-           console.log(req.params.id)
-        }).catch(err=>{console.log(err)})
-        let accessToken = await oAuth2Client.getAccessToken()
-        console.log(oAuth2Client)
+            console.log(req.params.id)
+         }).catch(err=>{console.log(err)})
+         let accessToken = await oAuth2Client.getAccessToken()
+         console.log(oAuth2Client)
+         
         
-        let transport = nodemailer.createTransport({
+         let transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
             type: 'OAuth2',
@@ -91,12 +93,12 @@ router.post("/paymentmail/:id", async (req,res)=>{
             }
           });
           console.log(transport)
-        let info = await transport.sendMail({
+          let info = await transport.sendMail({
             from: '"Mouli" <subrolinaghosh@gmail.com>', 
             to: participant.email, // list of receivers
             subject: "Hello ", 
             text: "Hello participants", 
-            html: "<b>welcome to nitmun x</b>", 
+            html: "<b>RECEIVED PAYMENT x</b>", 
           });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

@@ -21,6 +21,15 @@
                 <th>Name</th>
                 <th>Amount</th>
                 <th>Paid To</th>
+                <th>Email</th>
+                <th>Ph. No</th>
+                <th>Institute</th>
+                <th>Committee</th>
+                <th>Portfolio</th>
+                <th>Date</th>
+                <th>Preference1</th>
+                <th>Preference2</th>
+                <th>Prefernce3</th>
             </tr>
         </thead>
         <% paymentList.forEach(function(payment){%>
@@ -28,6 +37,15 @@
           <td><%= payment.name %></td> 
           <td><%= payment.amount %></td> 
           <td><%= payment.paidto %></td>
+          <td><%= payment.email %></td>
+          <td><%= payment.phoneNumber %></td>
+          <td><%= payment.institute %></td>
+          <td><%= payment.committeeAlloted %></td>
+          <td><%= payment.portfolioAlloted %></td>
+          <td><%= payment.date %></td>
+          <td><%= payment.preference1 %></td>
+          <td><%= payment.preference2 %></td>
+          <td><%= payment.preference3 %></td>
         </tr>
         <% })%>
     </table>

@@ -42,39 +42,39 @@
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th>Preference1</th>
-                    <th col-index=6>Committee2
+                    <th col-index=6>Preference1</th>
+                    <th col-index=7>Committee2
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th>Preference2</th>
-                    <th col-index=7>Committee3
+                    <th col-index=8>Preference2</th>
+                    <th col-index=9>Committee3
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th>Preference3</th>
-                    <th col-index=8>Committee Alloted
+                    <th col-index=10>Preference3</th>
+                    <th col-index=11>Committee Alloted
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=9>Experience
+                    <th col-index=12>Experience
 
                     </th>
-                    <th col-index=10>Allot Committee</th>
+                    <th col-index=13>Allot Committee</th>
                     
-                    <th col-index=11>Allot Portfolio
+                    <th col-index=14>Allot Portfolio
                        
                     </th>
-                    <th col-index=12></th>
-                    <th col-index=13>Status
+                    
+                    <th col-index=15>Status
                         <select class="table-filter">
                             <option value="all"></option>
                         </select>
                     </th>
-                    <th col-index=14></th>
+                    <th col-index=16></th>
 
                 </thead>
                 <tbody>
@@ -116,7 +116,6 @@
                             <td>
                                 <%= records.experience %>
                             </td>
-
                             <% if(records.committeeAlloted != ''){%> 
                       <td>
                         <form action="/api/updatecommittee/<%= records.id %>" method="POST" class =""> 
@@ -145,15 +144,7 @@
                         </form>
                          
                       <%}%>  
-
                     
-                        <td>
-                            <!-- <form action="/api/updatecommittee/<%= records.id %>" method="POST">
-                            <input type="text" value="<%= records.committeeAlloted %>" name="committeeAlloted" id="portfolioAlloted"/> 
-                                            
-                             <button type="submit" id="save">Save</button>                        
-                          </td>
-                        </form>  -->
                     <form action="/api/update/<%= records.id %>" method="POST">
                     <td>
                         <input type="text" value="<%= records.portfolioAlloted %>" name="portfolioAlloted" id="portfolioAlloted"/> 
@@ -163,45 +154,54 @@
                     </form> 
                     <td>
                       <%= records.status %>
-                    </td>
-                      <td>
-                      <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
-                        <form action="/api/allotmentmail/<%= records.id %>" method="POST">
-                            <button id="Allotmentmail">Send Mail</button>
-                        </form> 
-                            <!-- <script src="../public/mail.js"></script> -->
-                      <%}%>
-                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%>
-                        <button id="Paymentmail">Update Payment</button>   
-                           <!--<script src="../public/modal.js"></script>-->
-                      <%}%>
-                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid == true){%> 
-                           Done
-                      <%}%>
-                      </td>
-                      <% if(true) { %>
-                        <div id="myModal" class="modal">
-                        <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
-                        <div class="payment-form"> 
-                            Name:
-                        <input type="text"  name=  "name" required value="<%= records.name %>"/>
-                            Amount:
-                        <input type="number"  name=  "amount" required value="0" />
-                            Paid To:
-                        <input type="text" name= "paidto" id="">
-                        <form action="/api/paymentmail/<%= records.id %>" method="POST">
-                            <button id="Allotmentmail">Send Mail</button>
-                        </form> 
+                    </td> 
+                    <td>
+                        <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
+                          <form action="/api/allotmentmail/<%= records.id %>" method="POST">
+                              <button id="Allotmentmail">Allotment Mail</button>
+                          </form> 
+                              <!-- <script src="../public/mail.js"></script> -->
+                        <%}%>
+                        <% if(records.Allotedmail == true && records.Paymentupdate != true){%>
+                              <button id="Paymentmail">UPDATE Payment</button> 
+                             <!-- <script src="../public/modal.js"></script> -->
+                        <%}%>
+                        <% if( records.Paymentupdate == true && records.paid != true){%>
+                          <form action="/api/paymentmail/<%= records.id %>" method="POST">
+                              <button>Confirm Payment</button>
+                          </form> 
+                             <!-- <script src="../public/modal.js"></script> -->
+                        <%}%> 
+                        <% if( records.paid == true){%> 
+                             REGISTRATION COMPLETE
+                        <%}%>
+                        </td>
                         
-                        <form action="/api/updatepaid/<%= records.id %>" method="POST">
-                        <button class="saveBtn">save</button>
-                        </form>
-                         
-                     <% } %>
-                  </div>
-                  </form>  
+                          <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
+                          <div id="myModal" class="modal">
+                          <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <div class="payment-form"> 
+                              Name:
+                          <input type="text"  name=  "name" required value="<%= records.name%>"/>
+                              Amount:
+                          <input type="number"  name=  "amount" required value="100" />
+                              Paid To:
+                          <input type="text" name= "paidto" id="">
+                              Email:
+                          <input type="text" name= "email" id="">
+                              Phone Number:
+                          <input type="text" name= "phoneNumber" id="">
+                              Institute:
+                          <input type="text" name= "institute" id="">
+                              Committee:
+                          <input type="text" name= "committeeAlloted" id="">
+                          <button class="saveBtn">save</button>
+                      </div>
+                  </div> 
+                  
+              </div>
+          </form>
               </div> 
                                                 
               </div>
@@ -211,10 +211,8 @@
                  <% })%> 
           </tbody>
         </table>
-        <button id="btn">
-            download CSV
-        </button>
-        <script src="../public/csv.js"></script>
+       
+      
     </div>
 </body>
 
@@ -223,7 +221,6 @@
     h1 {
         margin-bottom: 10px;
     }
-
     #myButton {
         border-radius: 10px;
         background-color: rgb(65, 155, 65);
@@ -232,13 +229,10 @@
         padding: 2px;
         margin: 10px;
         width: 100px;
-
     }
-
     :hover {
         cursor: pointer;
     }
-
     #Allotmentmail {
         background-color: rgb(107, 107, 245);
         width: 120px;
@@ -257,19 +251,15 @@
         padding: 5px;
         margin: 5px;
     }
-
     select {
         border-radius: 5px;
     }
-
     input {
         width: 120px;
     }
-
     .top {
         display: flex;
     }
-
     .modal {
         display: none;
         /* Hidden by default */
@@ -290,7 +280,6 @@
         background-color: rgba(0, 0, 0, 0.4);
         /* Black w/ opacity */
     }
-
     /* Modal Content/Box */
     .modal-content {
         background-color: #fefefe;
@@ -301,7 +290,6 @@
         width: 20%;
         /* Could be more or less, depending on screen size */
     }
-
     /* The Close Button */
     .close {
         color: #aaa;
@@ -309,19 +297,16 @@
         font-size: 28px;
         font-weight: bold;
     }
-
     .close:hover,
     .close:focus {
         color: black;
         text-decoration: none;
         cursor: pointer;
     }
-
     .payment-form {
         display: flex;
         flex-direction: column;
     }
-
     .saveBtn {
         width: 20%;
         border-radius: 10px;
@@ -331,6 +316,5 @@
         padding: 2px;
         height: 30px;
         margin: 10px;
-
     }
 </style>
