@@ -127,10 +127,20 @@ router.post("/payments/:id", async (req,res) => {
            console.log(req.params.id)
         }).catch(err=>{console.log(err)})
         
+        const participant = await registrations.findById(req.params.id)
         const newPayment = new payments({
-            name: req.body.name,
+            name: participant.name,
             amount: req.body.amount,
-            paidto: req.body.paidto
+            paidto: req.body.paidto,
+            email: participant.email,
+            phoneNumber: participant.phoneNumber,
+            institute: participant.institute,
+            portfolioAlloted: participant.portfolioAlloted,
+            date: Date(participant.updatedAt),
+            preference1: participant.preference1,
+            preference2: participant.preference2,
+            preference3: participant.preference3
+       
         });
         const payment = await newPayment.save();
 
