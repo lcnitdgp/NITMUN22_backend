@@ -59,7 +59,7 @@ function display(){
     x =  document.querySelectorAll(".table-filter")
 
 
-console.log(x)
+// console.log(x)
 
 // x.forEach((filter_i) => {
 //     col_index = filter_i.parentElement.getAttribute("col-index");

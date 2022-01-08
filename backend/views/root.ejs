@@ -12,10 +12,7 @@
     <script src="../public/filter.js"></script>
     <script src="../public/loader.js"></script>
     <script src="../public/showfilter.js"></script>
-
-
-
-
+    <script src="../public/name.js"></script>
 </head>
 
 <body>
@@ -171,32 +168,34 @@
                       <% if(records.committeeAlloted != '' && records.Allotedmail != true){%> 
                         <form action="/api/allotmentmail/<%= records.id %>" method="POST">
                             <button id="Allotmentmail">Send Mail</button>
-                           </form> 
+                        </form> 
                             <!-- <script src="../public/mail.js"></script> -->
                       <%}%>
-                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%> 
-                            <button id="Paymentmail">Update Payment</button>
-                           <script src="../public/modal.js"></script>
+                      <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid != true){%>
+                        <button id="Paymentmail">Update Payment</button>   
+                           <!--<script src="../public/modal.js"></script>-->
                       <%}%>
                       <% if(records.committeeAlloted != '' && records.Allotedmail == true && records.paid == true){%> 
                            Done
                       <%}%>
                       </td>
-                      <div id="myModal" class="modal">
-                      <div class="modal-content">
-                      <span class="close">&times;</span>
-                      <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
-                      <div class="payment-form"> 
-                        Name:
-                      <input type="text"  name=  "name" required value=""/>
-                        Amount:
-                      <input type="number"  name=  "amount" required value="100" />
-                        Paid To:
-                      <input type="text" name= "paidto" id="">
-                      <form action="/api/paymentmail/<%= records.id %>" method="POST">
-                        <button id="Allotmentmail">Send Mail</button>
-                       </form> 
-                      <button class="saveBtn">save</button>
+                      <% if(true) { %>
+                        <div id="myModal" class="modal">
+                        <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
+                        <div class="payment-form"> 
+                            Name:
+                        <input type="text"  name=  "name" required value=""/>
+                            Amount:
+                        <input type="number"  name=  "amount" required value="100" />
+                            Paid To:
+                        <input type="text" name= "paidto" id="">
+                        <form action="/api/paymentmail/<%= records.id %>" method="POST">
+                            <button id="Allotmentmail">Send Mail</button>
+                        </form> 
+                        <button class="saveBtn">save</button>
+                     <% } %>
                   </div>
                   </form>  
               </div> 
@@ -213,7 +212,6 @@
         </button>
         <script src="../public/csv.js"></script>
     </div>
-
 </body>
 
 </html>

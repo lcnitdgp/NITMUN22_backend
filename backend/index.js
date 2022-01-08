@@ -11,6 +11,7 @@ const mailer = require("./routes/nodemailer");
 const fs = require('fs');
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
+var cors = require('cors')
 
 app.use(cookieParser())
 dotenv.config();
@@ -30,7 +31,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 app.use(helmet())
-
+app.use(cors())
 app.use(morgan("common"));
 app.use(express.static(__dirname + '/public'));
 app.use("/public", express.static('public'));
@@ -48,9 +49,13 @@ app.get('/login', function(req, res) {
     res.render('admin');
 });
 
+app.post('/api/modal', async(req,res) => {
+    const show_modal = true;
+    res.render('root',{show_modal})
+})
 
 
 
-app.listen(5200,()=>{
+app.listen(5300,()=>{
     console.log("Server Running");
 })
