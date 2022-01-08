@@ -72,6 +72,10 @@ const RegistrationSchema = new Schema({
     type: Boolean,
     default:false
    },
+   savePayment:{
+    type: Boolean,
+    default:false  
+   },
    paid:{
        type: Boolean,
        default:false

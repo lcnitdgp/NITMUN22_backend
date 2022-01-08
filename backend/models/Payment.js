@@ -18,13 +18,11 @@ const paymentSchema = new Schema({
         type: String,
         required: true,
         max: 50,
-        unique: true
     },
     phoneNumber:{
         type: Number,
         required: true,
         min: 10,
-        unique: true,
     },
     institute:{
         type: String, 

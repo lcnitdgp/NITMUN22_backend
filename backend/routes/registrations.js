@@ -121,7 +121,9 @@ router.post("/payments/:id", async (req,res) => {
         await registrations.findOneAndUpdate({_id:req.params.id},{
           
             
-            $set:{Paymentupdate: true} 
+            $set:{Paymentupdate: true,
+                savePayment: false
+                } 
            
         }).then(()=>{
            console.log(req.params.id)
@@ -144,6 +146,25 @@ router.post("/payments/:id", async (req,res) => {
        
         });
         const payment = await newPayment.save();
+        res.redirect("/api/dashboard")
+    } catch(err){
+        res.status(500).json(err);
+    }
+    
+})
+
+router.post("/updatepayment/:id", async (req,res) => {
+    try{
+        
+        await registrations.findOneAndUpdate({_id:req.params.id},{
+          
+            
+            $set:{savePayment: true} 
+           
+        }).then(()=>{
+           console.log(req.params.id)
+        }).catch(err=>{console.log(err)})
+   
         res.redirect("/api/dashboard")
     } catch(err){
         res.status(500).json(err);

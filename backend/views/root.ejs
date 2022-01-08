@@ -75,6 +75,7 @@
                         </select>
                     </th>
                     <th col-index=16></th>
+                    <th col-index=16></th>
 
                 </thead>
                 <tbody>
@@ -163,12 +164,14 @@
                               <!-- <script src="../public/mail.js"></script> -->
                         <%}%>
                         <% if(records.Allotedmail == true && records.Paymentupdate != true){%>
-                              <button id="Paymentmail">UPDATE Payment</button> 
+                            <form action="/api/updatepayment/<%= records.id %>" method="POST">
+                                <button id="Paymentmail">Update Payment</button>
+                            </form>  
                              <!-- <script src="../public/modal.js"></script> -->
                         <%}%>
                         <% if( records.Paymentupdate == true && records.paid != true){%>
                           <form action="/api/paymentmail/<%= records.id %>" method="POST">
-                              <button>Confirm Payment</button>
+                              <button id="Paymentmail">Confirm Payment</button>
                           </form> 
                              <!-- <script src="../public/modal.js"></script> -->
                         <%}%> 
@@ -176,22 +179,18 @@
                              REGISTRATION COMPLETE
                         <%}%>
                         </td>
-                        
+                        <% if( records.savePayment == true){%> 
+                      
+                        <td>
                           <form action="/api/payments/<%= records.id %>" method = "POST" class="login-form">
-                          <div id="myModal" class="modal">
-                          <div class="modal-content">
-                          <span class="close">&times;</span>
-                          <div class="payment-form"> 
                             Amount:
-                        <input type="number"  name=  "amount" required value="100" />
+                          <input type="number"  name=  "amount" required value="100" />
                             Paid To:
-                        <input type="text" name= "paidto" id="">
-                        <button class="saveBtn">save</button>
-                    </div>
-                  </div> 
-                  
-              </div>
+                         <input type="text" name= "paidto" id="">
+                         <button class="saveBtn">save</button>
           </form>
+        </td>
+        <%}%>
               </div> 
                                                 
               </div>
