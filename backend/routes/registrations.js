@@ -135,6 +135,7 @@ router.post("/payments/:id", async (req,res) => {
             email: participant.email,
             phoneNumber: participant.phoneNumber,
             institute: participant.institute,
+            committeeAlloted: participant.committeeAlloted,
             portfolioAlloted: participant.portfolioAlloted,
             date: Date(participant.updatedAt),
             preference1: participant.preference1,
@@ -143,9 +144,6 @@ router.post("/payments/:id", async (req,res) => {
        
         });
         const payment = await newPayment.save();
-
-        
-
         res.redirect("/api/dashboard")
     } catch(err){
         res.status(500).json(err);
