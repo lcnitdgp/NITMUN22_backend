@@ -3,10 +3,10 @@ const registrations = require("../models/Registrations");
 const nodemailer = require("nodemailer");
 const {google} = require("googleapis")
 
-const CLIENT_ID = '457703136236-96a3rrf7kie1fksvvc84jm5chh1qu29c.apps.googleusercontent.com'
-const CLIENT_SECRET = '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'
+const CLIENT_ID = '460493599138-nqmt3ppr4nkdnigv73318k5fq1uic8f9.apps.googleusercontent.com'
+const CLIENT_SECRET = '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'
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
-const REFRESH_TOKEN = '1//046XTjnS5O8NACgYIARAAGAQSNwF-L9IrYJL4IcSmPTeXsE0HRineTriT_R5jjo_6N7UFyC-noJJOmOLtQE-fO-ey3wGiELP4tRk'
+const REFRESH_TOKEN = '1//04X8DHZRTTO5aCgYIARAAGAQSNwF-L9IrGgSb9YrUcP7267syoBtIcda9j6rLLvqLuMkSS0daYorotVGa5oxuvuahO-HSdtFJQxo'
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
@@ -33,7 +33,7 @@ router.post("/allotmentmail/:id", async (req,res)=>{
             service: 'gmail',
             auth: {
             type: 'OAuth2',
-            user: 'subrolinaghosh@gmail.com',
+            user: 'verve.nitmun@gmail.com',
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             refreshToken: REFRESH_TOKEN,
@@ -45,11 +45,11 @@ router.post("/allotmentmail/:id", async (req,res)=>{
           });
           console.log(transport)
         let info = await transport.sendMail({
-            from: '"Mouli" <subrolinaghosh@gmail.com>', 
+            from: '"Mouli" <verve.nitmun@gmail.com>', 
             to: participant.email, // list of receivers
-            subject: "Hello ", 
-            text: "Hello participants", 
-            html: "<b>welcome to nitmun x</b>", 
+            subject: "", 
+            text: `Hello ${participant.name}`, 
+            html: "", 
           });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
@@ -82,7 +82,7 @@ router.post("/paymentmail/:id", async (req,res)=>{
             service: 'gmail',
             auth: {
             type: 'OAuth2',
-            user: 'subrolinaghosh@gmail.com',
+            user: 'verve.nitmun@gmail.com',
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             refreshToken: REFRESH_TOKEN,
@@ -94,11 +94,11 @@ router.post("/paymentmail/:id", async (req,res)=>{
           });
           console.log(transport)
           let info = await transport.sendMail({
-            from: '"Mouli" <subrolinaghosh@gmail.com>', 
+            from: '"Mouli" <verve.nitmun@gmail.com>', 
             to: participant.email, // list of receivers
             subject: "Hello ", 
-            text: "Hello participants", 
-            html: "<b>RECEIVED PAYMENT x</b>", 
+            text: `Hello ${participant.name}`, 
+            html: "", 
           });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));

@@ -171,7 +171,7 @@
                         <%}%>
                         <% if( records.Paymentupdate == true && records.paid != true){%>
                           <form action="/api/paymentmail/<%= records.id %>" method="POST">
-                              <button id="Paymentmail">Confirm Payment</button>
+                              <button id="confirm">Confirm Payment</button>
                           </form> 
                              <!-- <script src="../public/modal.js"></script> -->
                         <%}%> 
@@ -305,5 +305,14 @@
         padding: 2px;
         height: 30px;
         margin: 10px;
+    }
+    #confirm{
+        background-color: red;
+        width: 120px;
+        border-radius: 10px;
+        color: white;
+        border: none;
+        padding: 5px;
+        margin: 5px;
     }
 </style>

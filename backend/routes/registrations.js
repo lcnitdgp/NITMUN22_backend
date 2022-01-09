@@ -1,4 +1,5 @@
 const express = require("express").Router();
+const date = require('date-and-time')
 const registrations = require("../models/Registrations");
 const payments = require("../models/Payment");
 const router = require("./auth");
@@ -128,7 +129,7 @@ router.post("/payments/:id", async (req,res) => {
         }).then(()=>{
            console.log(req.params.id)
         }).catch(err=>{console.log(err)})
-        
+        const now = new Date();
         const participant = await registrations.findById(req.params.id)
         const newPayment = new payments({
             name: participant.name,
@@ -139,12 +140,13 @@ router.post("/payments/:id", async (req,res) => {
             institute: participant.institute,
             committeeAlloted: participant.committeeAlloted,
             portfolioAlloted: participant.portfolioAlloted,
-            date: Date(participant.updatedAt),
+            Date: date.format(now,'DD/MM/YY HH:mm:ss'),
             preference1: participant.preference1,
             preference2: participant.preference2,
             preference3: participant.preference3
        
         });
+        
         const payment = await newPayment.save();
         res.redirect("/api/dashboard")
     } catch(err){

@@ -36,8 +36,8 @@ const paymentSchema = new Schema({
         type: String,
         default: "",  
        },
-    date:{
-        type: Date,
+    Date:{
+        type: String,
         default: ""
        },
        preference1:{
