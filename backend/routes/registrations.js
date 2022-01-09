@@ -33,21 +33,21 @@ router.post("/register", async (req,res) => {
 })
 
 // update details
-router.post("/update/:id", async(req,res)=>{
-        try{
-             await registrations.findOneAndUpdate({_id:req.params.id},{
-              
-                
-                $set:{portfolioAlloted: req.body.portfolioAlloted} 
-               
-            }).then(()=>{
-                
-                res.redirect("/api/dashboard")
-            }).catch(err=>{console.log(err)})
+router.post("/updateportfolio/:id", async(req,res)=>{
+    try{
+         await registrations.findOneAndUpdate({_id:req.params.id},{
+          
             
-        } catch(err){
-            return res.status(500).json(err)
-        }
+            $set:{portfolioAlloted: req.body.portfolioAlloted} 
+           
+        }).then(()=>{
+          
+           res.redirect("/api/dashboard")
+        }).catch(err=>{console.log(err)})
+        
+    } catch(err){
+        return res.status(500).json(err)
+    }
 })
 
 //update committee
@@ -57,12 +57,10 @@ router.post("/updatecommittee/:id", async(req,res)=>{
          await registrations.findOneAndUpdate({_id:req.params.id},{
           
             
-            $set:{committeeAlloted: req.body.committeeAlloted} 
+            $set:{committeeAlloted: req.body.committeeAlloted}
            
         }).then(()=>{
-            console.log(req.body.committeeAlloted)
-           console.log("updated")
-           console.log(req.params.id)
+          
            res.redirect("/api/dashboard")
         }).catch(err=>{console.log(err)})
         
