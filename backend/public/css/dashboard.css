@@ -18,6 +18,7 @@ table {
 table th{
     position: sticky; 
     top: 0px;
+    width: 500px;
     
     background-color: #133b5c;
     color: rgb(241, 245, 179);
